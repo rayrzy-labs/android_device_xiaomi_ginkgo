@@ -5,3 +5,5 @@ genfscon sysfs /module/battery_saver/parameters/enabled                         
 
 # USB fastcharge
 genfscon sysfs /kernel/fast_charge/force_fast_charge                                          u:object_r:sysfs_fcharge:s0
+
+genfscon sysfs /devices/platform/soc/ae00000.qcom,mdss_mdp/drm/card0/sde-crtc-0/measured_fps       u:object_r:sysfs_graphics:s0
