@@ -7,6 +7,10 @@ on boot
     chown system system /proc/tp_gesture
     chmod 0660 /proc/tp_gesture
 
+    # FPS Info
+    chown system graphics /sys/devices/virtual/graphics/fb0/measured_fps
+    chmod 0666 /sys/devices/virtual/graphics/fb0/measured_fps
+
     # KCAL
     chown system system /sys/devices/platform/kcal_ctrl.0/kcal_cont
     chown system system /sys/devices/platform/kcal_ctrl.0/kcal_enable
