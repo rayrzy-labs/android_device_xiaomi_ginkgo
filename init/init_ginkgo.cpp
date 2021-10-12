@@ -16,10 +16,10 @@
 
 #include <cstdlib>
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
+#include <android-base/properties.h>
 #include <sys/_system_properties.h>
 #include <sys/sysinfo.h>
 
-#include <android-base/properties.h>
 #include "property_service.h"
 #include "vendor_init.h"
 
@@ -27,98 +27,96 @@ using android::base::GetProperty;
 using android::init::property_set;
 using std::string;
 
-void property_override(string prop, string value)
-{
-    auto pi = (prop_info*) __system_property_find(prop.c_str());
+void property_override(string prop, string value) {
+  auto pi = (prop_info *)__system_property_find(prop.c_str());
 
-    if (pi != nullptr)
-        __system_property_update(pi, value.c_str(), value.size());
-    else
-        __system_property_add(prop.c_str(), prop.size(), value.c_str(), value.size());
+  if (pi != nullptr)
+    __system_property_update(pi, value.c_str(), value.size());
+  else
+    __system_property_add(prop.c_str(), prop.size(), value.c_str(), value.size());
 }
 
-void vendor_load_properties()
-{
-    string device, model, fp, desc;
+void vendor_load_properties() {
+  string device, model, fp, desc;
 
-    string region = GetProperty("ro.boot.hwc", "");
-    string hwversion = GetProperty("ro.boot.hwversion", "");
+  string region = GetProperty("ro.boot.hwc", "");
+  string hwversion = GetProperty("ro.boot.hwversion", "");
 
-    if (region == "Global_B" && (hwversion == "18.31.0" ||
-        hwversion == "18.39.0" || hwversion == "19.39.0")) {
-        device = "willow";
-        model = "Redmi Note 8T";
-        fp = "xiaomi/willow/willow:10/QKQ1.200114.002/V12.0.4.0.QCXMIXM:user/release-keys";
-        desc = "willow-user 10 QKQ1.200114.002 V12.0.4.0.QCXMIXM release-keys";
-    } else {
-        device = "ginkgo";
-        model = "Redmi Note 8";
-        fp = "xiaomi/ginkgo/ginkgo:10/QKQ1.200114.002/V12.0.6.0.QCOMIXM:user/release-keys";
-        desc = "ginkgo-user 10 QKQ1.200114.002 V12.0.6.0.QCOMIXM release-keys";
-    }
+  if (region == "Global_B" && (hwversion == "18.31.0" ||
+                               hwversion == "18.39.0" || hwversion == "19.39.0")) {
+    device = "willow";
+    model = "Redmi Note 8T";
+    fp = "xiaomi/willow/willow:10/QKQ1.200114.002/V12.0.4.0.QCXMIXM:user/release-keys";
+    desc = "willow-user 10 QKQ1.200114.002 V12.0.4.0.QCXMIXM release-keys";
+  } else {
+    device = "ginkgo";
+    model = "Redmi Note 8";
+    fp = "xiaomi/ginkgo/ginkgo:10/QKQ1.200114.002/V12.0.6.0.QCOMIXM:user/release-keys";
+    desc = "ginkgo-user 10 QKQ1.200114.002 V12.0.6.0.QCOMIXM release-keys";
+  }
 
-    // Override all partitions' props
-    string prop_partitions[] = { "", "odm.", "product.", "system.", "vendor." };
+  // Override all partitions' props
+  string prop_partitions[] = {"", "odm.", "product.", "system.", "vendor."};
 
-    for (const string &prop : prop_partitions) {
-        property_override(string("ro.product.") + prop + string("name"), device);
-        property_override(string("ro.product.") + prop + string("device"), device);
-        property_override(string("ro.product.") + prop + string("model"), model);
-        property_override(string("ro.") + prop + string("build.product"), device);
-        property_override(string("ro.") + prop + string("build.fingerprint"), fp);
-        property_override(string("ro.") + prop + string("build.description"), desc);
-    }
+  for (const string &prop : prop_partitions) {
+    property_override(string("ro.product.") + prop + string("name"), device);
+    property_override(string("ro.product.") + prop + string("device"), device);
+    property_override(string("ro.product.") + prop + string("model"), model);
+    property_override(string("ro.") + prop + string("build.product"), device);
+    property_override(string("ro.") + prop + string("build.fingerprint"), fp);
+    property_override(string("ro.") + prop + string("build.description"), desc);
+  }
 
-    // Set hardware revision
-    property_override("ro.boot.hardware.revision", hwversion);
+  // Set hardware revision
+  property_override("ro.boot.hardware.revision", hwversion);
 
-    // Set hardware SKU prop
-    property_override("ro.boot.product.hardware.sku", device);
+  // Set hardware SKU prop
+  property_override("ro.boot.product.hardware.sku", device);
 
-    // Set camera model for EXIF data
-    property_override("persist.vendor.camera.model", model);
+  // Set camera model for EXIF data
+  property_override("persist.vendor.camera.model", model);
 
-    // Set dalvik heap configuration
-    char const *heapstartsize;
-    char const *heapgrowthlimit;
-    char const *heapsize;
-    char const *heapminfree;
-    char const *heapmaxfree;
-    char const *heaptargetutilization;
+  // Set dalvik heap configuration
+  char const *heapstartsize;
+  char const *heapgrowthlimit;
+  char const *heapsize;
+  char const *heapminfree;
+  char const *heapmaxfree;
+  char const *heaptargetutilization;
 
-    struct sysinfo sys;
-    sysinfo(&sys);
+  struct sysinfo sys;
+  sysinfo(&sys);
 
-    if (sys.totalram > 5072ull * 1024 * 1024) {
-        // from - phone-xhdpi-6144-dalvik-heap.mk
-        heapstartsize = "16m";
-        heapgrowthlimit = "256m";
-        heapsize = "512m";
-        heaptargetutilization = "0.5";
-        heapminfree = "8m";
-        heapmaxfree = "32m";
-    } else if (sys.totalram > 3072ull * 1024 * 1024) {
-        // from - phone-xhdpi-4096-dalvik-heap.mk
-        heapstartsize = "8m";
-        heapgrowthlimit = "192m";
-        heapsize = "512m";
-        heaptargetutilization = "0.6";
-        heapminfree = "8m";
-        heapmaxfree = "16m";
-    } else {
-        // from - phone-xhdpi-2048-dalvik-heap.mk
-        heapstartsize = "8m";
-        heapgrowthlimit = "192m";
-        heapsize = "512m";
-        heaptargetutilization = "0.75";
-        heapminfree = "512k";
-        heapmaxfree = "8m";
-    }
+  if (sys.totalram > 5072ull * 1024 * 1024) {
+    // from - phone-xhdpi-6144-dalvik-heap.mk
+    heapstartsize = "16m";
+    heapgrowthlimit = "256m";
+    heapsize = "512m";
+    heaptargetutilization = "0.5";
+    heapminfree = "8m";
+    heapmaxfree = "32m";
+  } else if (sys.totalram > 3072ull * 1024 * 1024) {
+    // from - phone-xhdpi-4096-dalvik-heap.mk
+    heapstartsize = "8m";
+    heapgrowthlimit = "192m";
+    heapsize = "512m";
+    heaptargetutilization = "0.6";
+    heapminfree = "8m";
+    heapmaxfree = "16m";
+  } else {
+    // from - phone-xhdpi-2048-dalvik-heap.mk
+    heapstartsize = "8m";
+    heapgrowthlimit = "192m";
+    heapsize = "512m";
+    heaptargetutilization = "0.75";
+    heapminfree = "512k";
+    heapmaxfree = "8m";
+  }
 
-    property_set("dalvik.vm.heapstartsize", heapstartsize);
-    property_set("dalvik.vm.heapgrowthlimit", heapgrowthlimit);
-    property_set("dalvik.vm.heapsize", heapsize);
-    property_set("dalvik.vm.heaptargetutilization", heaptargetutilization);
-    property_set("dalvik.vm.heapminfree", heapminfree);
-    property_set("dalvik.vm.heapmaxfree", heapmaxfree);
+  property_set("dalvik.vm.heapstartsize", heapstartsize);
+  property_set("dalvik.vm.heapgrowthlimit", heapgrowthlimit);
+  property_set("dalvik.vm.heapsize", heapsize);
+  property_set("dalvik.vm.heaptargetutilization", heaptargetutilization);
+  property_set("dalvik.vm.heapminfree", heapminfree);
+  property_set("dalvik.vm.heapmaxfree", heapmaxfree);
 }
