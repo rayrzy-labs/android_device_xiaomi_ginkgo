@@ -32,6 +32,6 @@ $(call inherit-product, vendor/nusantara/config/common_full_phone.mk)
 PRODUCT_NAME := nad_ginkgo
 PRODUCT_DEVICE := ginkgo
 PRODUCT_BRAND := Xiaomi
-PRODUCT_MODEL := Redmi Note 8
+PRODUCT_MODEL := Redmi Note 8/8T
 PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
