@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2018 The Xiaomi-SDM660 Project
+<!-- Copyright (C) 2025 The Xiaomi-Trinket Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,48 +14,72 @@
      limitations under the License.
 -->
 <resources>
-    <string name="advanced_settings">Налаштування Xiaomi</string>
-    <string name="advanced_settings_summary">Додаткові налаштування</string>
+    <string name="advanced_settings">Xiaomi Parts</string>
+    <string name="advanced_settings_summary">Додаткові налаштування пристрою</string>
 
     <!--  Audio -->
     <string name="audio_title">Аудіо</string>
 
     <!-- Dirac settings -->
-    <string name="dirac_title">Покращення звуку Mi</string>
-    <string name="dirac_summary">Оптимізуйте якість звуку</string>
-    <string name="dirac_headset_title">Вибрати тип навушників</string>
-    <string name="dirac_preset_title">Вибрати шаблон</string>
+    <string name="dirac_title">Mi Sound Enhancer</string>
+    <string name="dirac_summary">Оптимізація якості звуку</string>
+    <string name="dirac_headset_title">Виберіть тип навушників</string>
+    <string name="dirac_preset_title">Виберіть пресет</string>
 
     <!-- Dirac settings: Headset types -->
     <string name="dirac_headset_default">За замовчуванням</string>
-    <string name="dirac_headset_general">Звичайні</string>
-    <string name="dirac_headset_general_inear">Звичайні внутрішньоканальні</string>
+    <string name="dirac_headset_earbuds">Mi Earbuds</string>
+    <string name="dirac_headset_in_ear_2013">Mi In-Ear (2013)</string>
+    <string name="dirac_headset_piston_1">Mi Piston-1</string>
+    <string name="dirac_headset_general">Загальний</string>
+    <string name="dirac_headset_general_inear">Загальний In-Ear</string>
+    <string name="dirac_headset_piston_basic">Basic Edition</string>
+    <string name="dirac_headset_piston_2">Mi Piston-2</string>
+    <string name="dirac_headset_piston_standard">Standard Edition</string>
+    <string name="dirac_headset_headphone">Mi Headphones</string>
+    <string name="dirac_headset_piston_youth">Youth Edition</string>
+    <string name="dirac_headset_piston_color">Color Edition</string>
+    <string name="dirac_headset_in_ear">Mi In-Ear</string>
+    <string name="dirac_headset_capsule">Mi Capsule</string>
+    <string name="dirac_headset_in_ear_pro">Mi In-Ear Pro</string>
+    <string name="dirac_headset_comfort">Mi Comfort</string>
+    <string name="dirac_headset_reduction_noise">Mi Noise Cancelling Type-C</string>
+    <string name="dirac_headset_cancelling">Mi Noise Cancelling 3.5mm</string>
+    <string name="dirac_headset_half_in_ear">Mi Half In-Ear</string>
+    <string name="dirac_headset_in_ear2">Mi In-Ear 2</string>
+    <string name="dirac_headset_earphone_basic">Mi Earphones Basic</string>
+    <string name="dirac_headset_earphone">Mi Earphones</string>
 
     <!-- Dirac settings: Equalizer presets -->
     <string name="dirac_preset_default">За замовчуванням</string>
     <string name="dirac_preset_rock">Рок</string>
     <string name="dirac_preset_jazz">Джаз</string>
     <string name="dirac_preset_pop">Поп</string>
-    <string name="dirac_preset_classical">Класика</string>
+    <string name="dirac_preset_classical">Класична</string>
     <string name="dirac_preset_hiphop">Хіп-хоп</string>
     <string name="dirac_preset_blues">Блюз</string>
-    <string name="dirac_preset_electronic">Електроніка</string>
+    <string name="dirac_preset_electronic">Електронна</string>
     <string name="dirac_preset_country">Кантрі</string>
-    <string name="dirac_preset_dance">Танцювальні</string>
+    <string name="dirac_preset_dance">Танцювальна</string>
     <string name="dirac_preset_metal">Метал</string>
+    <string name="dirac_preset_bass_booster">Підсилювач басів</string>
 
     <!-- Display -->
-    <string name="display_title">Екран</string>
+    <string name="display_title">Дисплей</string>
+
+    <!-- Ambient Display -->
+    <string name="ambient_display_xiaomi">Xiaomi Doze</string>
+    <string name="advanced_doze_summary">Ambient Display</string>
 
     <!-- KCAL -->
-    <string name="device_kcal_title">Калібровка кольорів екрану</string>
-    <string name="advanced_settings_kcal">Налаштуйте відображення кольорів на ваш смак</string>
+    <string name="device_kcal_title">Калібрування кольору дисплея</string>
+    <string name="advanced_settings_kcal">Калібрування кольору дисплея</string>
     <string name="cat_colormanagement">Налаштування кольору</string>
-    <string name="cat_calibration">Калибровка экрану</string>
+    <string name="cat_calibration">Калібрування дисплея</string>
 
-    <string name="kcal_enabled">Вкл</string>
-    <string name="kcal_disabled">Викл</string>
-    <string name="set_on_boot">Вкл при завантаженні</string>
+    <string name="kcal_enabled">Увімкнено</string>
+    <string name="kcal_disabled">Вимкнено</string>
+    <string name="set_on_boot">Застосовувати при завантаженні</string>
     <string name="color_red">Червоний</string>
     <string name="color_green">Зелений</string>
     <string name="color_blue">Синій</string>
@@ -64,42 +88,57 @@
     <string name="value">Значення</string>
     <string name="contrast">Контраст</string>
     <string name="hue">Відтінок</string>
-    <string name="grayscale">Показати в чорно-білому</string>
+    <string name="grayscale">Чорно-білий дисплей</string>
 
     <!-- Presets For KCAL -->
-    <string name="presets_dialog_title">Вибрати шаблон</string>
+    <string name="presets_dialog_title">Виберіть пресет</string>
     <string name="preset_default">За замовчуванням</string>
-    <string name="preset_version_1">1 варіант</string>
-    <string name="preset_version_2">2 варіант</string>
-    <string name="preset_version_3">3 варіант</string>
-    <string name="preset_triluminous">Трилумінозний</string>
-    <string name="preset_deep_black_white">Глибокий чорний і білий колір</string>
-    <string name="preset_deep_natural">Надзвичайно натуральні кольори</string>
-    <string name="preset_cool_amoled">Хороший Amoled</string>
-    <string name="preset_extreme_amoled">Екстрім-Amoled</string>
+    <string name="preset_version_1">Версія 1</string>
+    <string name="preset_version_2">Версія 2</string>
+    <string name="preset_version_3">Версія 3</string>
+    <string name="preset_triluminous">Triluminous</string>
+    <string name="preset_deep_black_white">Глибокий чорний і білий</string>
+    <string name="preset_deep_natural">Глибокий натуральний</string>
+    <string name="preset_cool_amoled">Холодний Amoled</string>
+    <string name="preset_extreme_amoled">Extreme Amoled</string>
     <string name="preset_warm_amoled">Теплий Amoled</string>
+    <string name="preset_hybrid_mamba">Hybrid Mamba</string>
 
+    <string name="kcal_presets">@string/presets_dialog_title</string>
     <string name="kcal_reset">Скинути</string>
 
     <!-- Speaker -->
     <string name="speaker_category">Динамік</string>
 
     <!-- Clear Speaker -->
-    <string name="clear_speaker_title">Очистка динаміка</string>
-    <string name="clear_speaker_summary">Відтворити 30-ти секундний звук для очистки динаміка</string>
-    <string name="clear_speaker_description">Включить цей параметр 1-2 рази, якщо динамік трохи забитий. Також поставте звук на максимальну гучність.\n\nЯкщо динамік сильно забитий, запустіть цю процедуру 2-5 разів и потрясіть телефоном. Динамік повинен бути направленим вниз</string>
+    <string name="clear_speaker_title">Очищення динаміка</string>
+    <string name="clear_speaker_summary">Відтворіть 30-секундний звук для очищення динаміка</string>
+    <string name="clear_speaker_description">Запустіть цю функцію один або два рази, якщо динамік трохи забруднений пилом. Встановіть максимальну гучність.\n\nЯкщо динамік сильно заблокований, запустіть цю функцію 2-5 разів, струшуючи пристрій динаміком вниз.</string>
 
     <!-- USB fastcharge -->
-    <string name="usb_fastcharge_title">USB швидка зарядка</string>
-    <string name="fastcharge_title">Включити швидку зарядку по USB</string>
-    <string name="fastcharge_summary">Заряджати в притик до 900mA, коли телефон підключений через порт USB 3.0</string>
+    <string name="usb_fastcharge_title">USB Fastcharge</string>
+    <string name="fastcharge_title">Увімкнути USB Fastcharge</string>
+    <string name="fastcharge_summary">Зарядка до 900мА при підключенні до порту USB 3.0</string>
 
     <!-- Vibration -->
-    <string name="vibration_title">Контроль вибрації</string>
-    <string name="vibration_strength_title">Сила</string>
+    <string name="vibration_title">Керування вібрацією</string>
+    <string name="vibration_strength_title">Інтенсивність</string>
 
     <!-- CustomSeekBarPreference -->
-    <string name="edit_value">Выбрати нове значення</string>
-    <string name="default_value">Стандартне значення</string>
+    <string name="edit_value">Виберіть нове значення</string>
+    <string name="default_value">Значення за замовчуванням</string>
     <string name="edit_hint">Значення між %1$d і %2$d</string>
+    
+    <!-- Selinux Switch -->
+    <string name="selinux_explanation_summary">SELinux — це набір модифікацій ядра та інструментів користувача. Використовуйте на свій страх і ризик.\n(Якщо наступні параметри неактивні, ваш телефон не має root-доступу, і вам потрібно прошити Magisk, щоб використовувати цю функцію.)</string>
+    <string name="selinux_category">SELinux</string>
+    <string name="selinux_mode_title">Режим SELinux</string>
+    <string name="selinux_permissive_summary">Permissive</string>
+    <string name="selinux_enforcing_summary">Enforcing</string>
+    <string name="selinux_persistence_title">Зберігати після перезавантаження</string>
+    <string name="selinux_persistence_summary">Відновлювати зазначений режим sepolicy при кожному завантаженні</string>
+    <string name="selinux_permissive_toast_title">SELinux встановлено в режим permissive!</string>
+    <string name="selinux_enforcing_toast_title">SELinux встановлено в режим enforcing!</string>
+    <string name="cannot_get_su">Дія не виконана через відсутність доступу superuser</string>
+
 </resources>
