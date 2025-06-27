@@ -39,10 +39,7 @@ void property_override(string prop, string value)
 
 void vendor_load_properties()
 {
-    string device, model;
-
-    string fp = "google/walleye/walleye:8.1.0/OPM1.171019.011/4448085:user/release-keys";
-    string desc = "walleye-user 8.1.0 OPM1.171019.011 4448085 release-keys";
+    string device, model, fp, desc;
 
     string region = GetProperty("ro.boot.hwc", "");
     string hwversion = GetProperty("ro.boot.hwversion", "");
@@ -51,9 +48,13 @@ void vendor_load_properties()
         hwversion == "18.39.0" || hwversion == "19.39.0")) {
         device = "willow";
         model = "Redmi Note 8T";
+        fp = "xiaomi/willow/willow:10/QKQ1.200114.002/V12.0.4.0.QCXMIXM:user/release-keys";
+        desc = "willow-user 10 QKQ1.200114.002 V12.0.4.0.QCXMIXM release-keys";
     } else {
         device = "ginkgo";
         model = "Redmi Note 8";
+        fp = "xiaomi/ginkgo/ginkgo:10/QKQ1.200114.002/V12.0.6.0.QCOMIXM:user/release-keys";
+        desc = "ginkgo-user 10 QKQ1.200114.002 V12.0.6.0.QCOMIXM release-keys";
     }
 
     // Override all partitions' props
