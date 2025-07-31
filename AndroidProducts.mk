@@ -1,8 +1,8 @@
 #
-# Copyright (C) 2021 NusantaraProject-ROM
+# Copyright (C) The LineageOS Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/nad_ginkgo.mk
+    $(LOCAL_DIR)/lineage_ginkgo.mk
