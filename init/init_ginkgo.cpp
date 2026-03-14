@@ -33,7 +33,8 @@ void property_override(string prop, string value) {
   if (pi != nullptr)
     __system_property_update(pi, value.c_str(), value.size());
   else
-    __system_property_add(prop.c_str(), prop.size(), value.c_str(), value.size());
+    __system_property_add(prop.c_str(), prop.size(), value.c_str(),
+                          value.size());
 }
 
 void vendor_load_properties() {
@@ -42,17 +43,77 @@ void vendor_load_properties() {
   string region = GetProperty("ro.boot.hwc", "");
   string hwversion = GetProperty("ro.boot.hwversion", "");
 
-  if (region == "Global_B" && (hwversion == "18.31.0" ||
-                               hwversion == "18.39.0" || hwversion == "19.39.0")) {
+  if (region == "Global_B" &&
+      (hwversion == "18.31.0" || hwversion == "18.39.0" ||
+       hwversion == "19.39.0")) {
+    // Willow (Redmi Note 8T)
     device = "willow";
     model = "Redmi Note 8T";
-    fp = "xiaomi/willow/willow:10/QKQ1.200114.002/V12.0.4.0.QCXMIXM:user/release-keys";
-    desc = "willow-user 10 QKQ1.200114.002 V12.0.4.0.QCXMIXM release-keys";
+
+    if (region == "Global_B") {
+      // Global fingerprint for willow
+      fp = "xiaomi/willow/willow:10/QKQ1.200114.002/V12.0.4.0.QCXMIXM:user/"
+           "release-keys";
+      desc = "willow-user 10 QKQ1.200114.002 V12.0.4.0.QCXMIXM release-keys";
+    } else if (region == "EEA") {
+      // EEA fingerprint for willow
+      fp = "xiaomi/willow_eea/willow:10/QKQ1.200114.002/V12.0.4.0.QCXEUXM:user/"
+           "release-keys";
+      desc =
+          "willow_eea-user 10 QKQ1.200114.002 V12.0.4.0.QCXEUXM release-keys";
+    } else if (region == "Russia") {
+      // Russia fingerprint for willow
+      fp = "xiaomi/willow_ru/willow:10/QKQ1.200114.002/V12.0.5.0.QCXRUXM:user/"
+           "release-keys";
+      desc = "willow_ru-user 10 QKQ1.200114.002 V12.0.5.0.QCXRUXM release-keys";
+    } else {
+      // Default Global fingerprint
+      fp = "xiaomi/willow/willow:10/QKQ1.200114.002/V12.0.4.0.QCXMIXM:user/"
+           "release-keys";
+      desc = "willow-user 10 QKQ1.200114.002 V12.0.4.0.QCXMIXM release-keys";
+    }
   } else {
+    // Ginkgo (Redmi Note 8)
     device = "ginkgo";
     model = "Redmi Note 8";
-    fp = "xiaomi/ginkgo/ginkgo:10/QKQ1.200114.002/V12.0.6.0.QCOMIXM:user/release-keys";
-    desc = "ginkgo-user 10 QKQ1.200114.002 V12.0.6.0.QCOMIXM release-keys";
+
+    if (region == "CN" || region == "China") {
+      // China fingerprint for ginkgo
+      fp = "xiaomi/ginkgo/ginkgo:10/QKQ1.200114.002/V12.0.3.0.QCOCNXM:user/"
+           "release-keys";
+      desc = "ginkgo-user 10 QKQ1.200114.002 V12.0.3.0.QCOCNXM release-keys";
+    } else if (region == "India") {
+      // India fingerprint for ginkgo
+      fp = "xiaomi/ginkgo/ginkgo:10/QKQ1.200114.002/V12.0.2.0.QCOINXM:user/"
+           "release-keys";
+      desc = "ginkgo-user 10 QKQ1.200114.002 V12.0.2.0.QCOINXM release-keys";
+    } else if (region == "Global") {
+      // Global fingerprint for ginkgo
+      fp = "xiaomi/ginkgo/ginkgo:10/QKQ1.200114.002/V12.0.6.0.QCOMIXM:user/"
+           "release-keys";
+      desc = "ginkgo-user 10 QKQ1.200114.002 V12.0.6.0.QCOMIXM release-keys";
+    } else if (region == "Indonesia") {
+      // Indonesia fingerprint for ginkgo
+      fp = "xiaomi/ginkgo/ginkgo:10/QKQ1.200114.002/V12.0.2.0.QCOIDXM:user/"
+           "release-keys";
+      desc = "ginkgo-user 10 QKQ1.200114.002 V12.0.2.0.QCOIDXM release-keys";
+    } else if (region == "Russia") {
+      // Russia fingerprint for ginkgo
+      fp = "xiaomi/ginkgo_ru/ginkgo:10/QKQ1.200114.002/V12.0.2.0.QCORUXM:user/"
+           "release-keys";
+      desc = "ginkgo_ru-user 10 QKQ1.200114.002 V12.0.2.0.QCORUXM release-keys";
+    } else if (region == "EEA") {
+      // EEA fingerprint for ginkgo
+      fp = "xiaomi/ginkgo_eea/ginkgo:10/QKQ1.200114.002/V12.0.6.0.QCOEUXM:user/"
+           "release-keys";
+      desc =
+          "ginkgo_eea-user 10 QKQ1.200114.002 V12.0.6.0.QCOEUXM release-keys";
+    } else {
+      // Default Global fingerprint
+      fp = "xiaomi/ginkgo/ginkgo:10/QKQ1.200114.002/V12.0.6.0.QCOMIXM:user/"
+           "release-keys";
+      desc = "ginkgo-user 10 QKQ1.200114.002 V12.0.6.0.QCOMIXM release-keys";
+    }
   }
 
   // Override all partitions' props
