@@ -28,8 +28,7 @@
 #
 
 on early-init
-    write /dev/stune/schedtune.boost 50
-    write /dev/stune/schedtune.prefer_idle 1
+    write /proc/sys/kernel/sched_boost 1
     symlink /data/tombstones /tombstones
 
 on init
@@ -295,9 +294,6 @@ on property:sys.thermallct.isincall=0
     write /sys/class/power_supply/battery/device/thermalcall 0
 
 on property:sys.boot_completed=1
-    write /dev/stune/schedtune.prefer_idle 0
-    write /dev/stune/schedtune.boost 0
-
     # Enable ZRAM on boot_complete
     swapon_all /vendor/etc/fstab.qcom
 
