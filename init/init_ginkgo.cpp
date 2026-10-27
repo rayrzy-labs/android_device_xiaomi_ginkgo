@@ -43,19 +43,17 @@ void vendor_load_properties() {
   string region = GetProperty("ro.boot.hwc", "");
   string hwversion = GetProperty("ro.boot.hwversion", "");
 
-  if (region == "Global_B" &&
-      (hwversion == "18.31.0" || hwversion == "18.39.0" ||
-       hwversion == "19.39.0")) {
+  // Willow is detected by hardware version only; region just picks the
+  // fingerprint.
+  bool is_willow = hwversion == "18.31.0" || hwversion == "18.39.0" ||
+                   hwversion == "19.39.0";
+
+  if (is_willow) {
     // Willow (Redmi Note 8T)
     device = "willow";
     model = "Redmi Note 8T";
 
-    if (region == "Global_B") {
-      // Global fingerprint for willow
-      fp = "xiaomi/willow/willow:10/QKQ1.200114.002/V12.0.4.0.QCXMIXM:user/"
-           "release-keys";
-      desc = "willow-user 10 QKQ1.200114.002 V12.0.4.0.QCXMIXM release-keys";
-    } else if (region == "EEA") {
+    if (region == "EEA") {
       // EEA fingerprint for willow
       fp = "xiaomi/willow_eea/willow:10/QKQ1.200114.002/V12.0.4.0.QCXEUXM:user/"
            "release-keys";
@@ -67,7 +65,7 @@ void vendor_load_properties() {
            "release-keys";
       desc = "willow_ru-user 10 QKQ1.200114.002 V12.0.5.0.QCXRUXM release-keys";
     } else {
-      // Default Global fingerprint
+      // Global (Global_B) and default fingerprint for willow
       fp = "xiaomi/willow/willow:10/QKQ1.200114.002/V12.0.4.0.QCXMIXM:user/"
            "release-keys";
       desc = "willow-user 10 QKQ1.200114.002 V12.0.4.0.QCXMIXM release-keys";
@@ -87,11 +85,6 @@ void vendor_load_properties() {
       fp = "xiaomi/ginkgo/ginkgo:10/QKQ1.200114.002/V12.0.2.0.QCOINXM:user/"
            "release-keys";
       desc = "ginkgo-user 10 QKQ1.200114.002 V12.0.2.0.QCOINXM release-keys";
-    } else if (region == "Global") {
-      // Global fingerprint for ginkgo
-      fp = "xiaomi/ginkgo/ginkgo:10/QKQ1.200114.002/V12.0.6.0.QCOMIXM:user/"
-           "release-keys";
-      desc = "ginkgo-user 10 QKQ1.200114.002 V12.0.6.0.QCOMIXM release-keys";
     } else if (region == "Indonesia") {
       // Indonesia fingerprint for ginkgo
       fp = "xiaomi/ginkgo/ginkgo:10/QKQ1.200114.002/V12.0.2.0.QCOIDXM:user/"
@@ -109,7 +102,7 @@ void vendor_load_properties() {
       desc =
           "ginkgo_eea-user 10 QKQ1.200114.002 V12.0.6.0.QCOEUXM release-keys";
     } else {
-      // Default Global fingerprint
+      // Global and default fingerprint for ginkgo
       fp = "xiaomi/ginkgo/ginkgo:10/QKQ1.200114.002/V12.0.6.0.QCOMIXM:user/"
            "release-keys";
       desc = "ginkgo-user 10 QKQ1.200114.002 V12.0.6.0.QCOMIXM release-keys";
